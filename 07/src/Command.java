@@ -156,6 +156,10 @@ public class Command {
         this.cmd = cmd;
     }
 
+    protected Command(String source) {
+        originalSource = source;
+    }
+
     protected Command(String source, String cmd, String segment, int index) {
         originalSource = source;
         this.cmd = cmd;
@@ -165,7 +169,6 @@ public class Command {
 
     public static Command create(String source) {
         commandCount += 1;
-        String errorMsg;
         int iComment = source.lastIndexOf("//");
         if (iComment >= 0) {
             source = source.substring(0, iComment);
@@ -177,7 +180,20 @@ public class Command {
             }
             return new Command(source, strings[0]);
         }
-        if (strings.length == 3) {
+        String errorMsg = "You should have 3 fields in your argument [" + source + "].  (Or 2 for labels and gotos.)  But you have " + source.length() + ".";
+        if (strings.length == 2) {
+            String cmd = strings[0];
+            String labelName = strings[1];
+            if ("label".equals(cmd)) {
+                return LabelCommand.create(source, cmd, labelName);
+            }
+            if ("goto".equals(cmd)) {
+                return GotoCommand.create(source, cmd, labelName);
+            }
+            if ("if-goto".equals(cmd)) {
+                return IfGotoCommand.create(source, cmd, labelName);
+            }
+        } else if (strings.length == 3) {
             try {
                 String cmd = strings[0];
                 String segment = strings[1];
@@ -202,8 +218,6 @@ public class Command {
                 errorMsg = "Command " + source + " should have a numeric third parameter.  But it is [" + strings[2] + "].";
                 throw new IllegalArgumentException(errorMsg, e);
             }
-        } else {
-            errorMsg = "You should have 3 fields in your argument [" + source + "], but you have " + source.length() + ".";
         }
         throw new IllegalArgumentException(errorMsg);
     }
