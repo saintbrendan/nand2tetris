@@ -5,11 +5,11 @@ public class PushCommand extends Command {
     private String suffix = "\n" +
             "A=D+M\n" +
             "D=M\n";
-    protected static final String PUSH_D = "@SP\n" +
-            "A=M\n" +
-            "M=D\n" +
-            "@SP\n" +
-            "M=M+1";
+    protected static final String PUSH_D = "   @SP\n" +
+            "   A=M\n" +
+            "   M=D\n" +
+            "   @SP\n" +
+            "   M=M+1";
 
     private String asm;
 

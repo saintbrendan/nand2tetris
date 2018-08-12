@@ -193,6 +193,10 @@ public class Command {
             if ("if-goto".equals(cmd)) {
                 return IfGotoCommand.create(source, cmd, labelName);
             }
+            // Push segment.  E.g. push LCL, push ARG, push THIS
+            if ("push".equals(cmd)) {
+                return PushSegment.create(source, labelName);
+            }
         } else if (strings.length == 3) {
             try {
                 String cmd = strings[0];
@@ -202,6 +206,11 @@ public class Command {
                     String functionName = strings[1];
                     int nArgs = index;
                     return CallCommand.create(source, cmd, functionName, nArgs);
+                }
+                if (cmd.equals("function")) {
+                    String functionName = strings[1];
+                    int nLocalVars = index;
+                    return FunctionCommand.create(source,functionName, nLocalVars);
                 }
                 if (cmd.equals("push")) {
                     return PushCommand.create(source, cmd, segment, index);
