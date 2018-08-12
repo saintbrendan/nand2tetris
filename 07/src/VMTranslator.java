@@ -1,24 +1,53 @@
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 public class VMTranslator {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String fileName = "C:\\Users\\saint\\OneDrive\\Documents\\nand2tetris\\projects\\08\\ProgramFlow\\FibonacciSeries\\FibonacciSeries.vm";
-        OutputStream outstream = System.out;
         if (args.length >= 1) {
             fileName = args[0];
         }
+        File input = new File(fileName);
+        PrintStream out = System.out;
+        if (input.isDirectory())  {
+            /// create the outputstream
+            OutputStream outputstream = outstreamFromDir(fileName);
+            out = new PrintStream(outputstream);
+            /// write the bootstrap
+            out.println("   @256");
+            out.println("   D=A");
+            out.println("   @SP");
+            out.println("   M=D");
+            out.println(CallCommand.create("call Sys.init", "Sys.init", 0));
+            /// for each file in the directory, generate the asm
+            File[] vmFiles = input.listFiles(new FilenameFilter() {
+                @Override
+                public boolean accept(File dir, String name) {
+                    return name.endsWith(".vm");
+                }
+            });
+            for (File file: vmFiles){
+                PrintStream thisOut = new PrintStream(file);
+                genCode(fileName, out);
+                if (out != System.out) {
+                    genCode(fileName, System.out);
+                }
+            }
+            return;
+        }
+
         String outFileName = fileName.substring(0, fileName.lastIndexOf('.')) + ".asm";
         System.out.println("Outputting to " + outFileName);
         try {
-            outstream = new FileOutputStream(outFileName);
+            OutputStream outputstream = new FileOutputStream(outFileName);
+            out = new PrintStream(outputstream);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        PrintStream out = new PrintStream(outstream);
         Command.setStaticName(getFileBase(fileName));
 
         genCode(fileName, out);
@@ -27,6 +56,15 @@ public class VMTranslator {
         }
     }
 
+    private static OutputStream outstreamFromDir(String path) throws IOException {
+        String trimmedPath = path.replaceAll("[/\\\\]+$", "");   // strip trailing slashes
+        String dirName = trimmedPath.substring(path.lastIndexOf('\\')+1);
+        String filename = dirName.substring(dirName.lastIndexOf('/')+1) + ".asm";
+        Path fullPath = Paths.get(trimmedPath,filename);
+        return Files.newOutputStream(fullPath);
+    }
+
+    ///  TODO change first parameter to an input stream
     private static void genCode(String fileName, PrintStream out) {
         //read file into stream, try-with-resources
         try (Stream<String> stream = Files.lines(Paths.get(fileName))) {

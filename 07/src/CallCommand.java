@@ -8,7 +8,7 @@ public class CallCommand extends Command {
         this.nArgs = nArgs;
     }
 
-    public static Command create(String source, String cmd, String functionName, int nArgs) {
+    public static Command create(String source, String functionName, int nArgs) {
         return new CallCommand(source, functionName, nArgs);
     }
 

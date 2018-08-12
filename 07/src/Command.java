@@ -169,6 +169,7 @@ public class Command {
 
     public static Command create(String source) {
         commandCount += 1;
+        /// TODO should be indexOf("//")
         int iComment = source.lastIndexOf("//");
         if (iComment >= 0) {
             source = source.substring(0, iComment);
@@ -177,6 +178,9 @@ public class Command {
         if (strings.length == 1) {
             if (strings[0].length() == 0) {
                 return null;
+            }
+            if (strings[0].equals("return")) {
+                return ReturnCommand.create(source);
             }
             return new Command(source, strings[0]);
         }
@@ -205,7 +209,7 @@ public class Command {
                 if (cmd.equals("call")) {
                     String functionName = strings[1];
                     int nArgs = index;
-                    return CallCommand.create(source, cmd, functionName, nArgs);
+                    return CallCommand.create(source, functionName, nArgs);
                 }
                 if (cmd.equals("function")) {
                     String functionName = strings[1];
