@@ -61,6 +61,6 @@ public class PushCommand extends Command {
 
     @Override
     public String getAsmCode() {
-        return "// " + originalSource + "\n" + asm;
+        return asm;
     }
 }

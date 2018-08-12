@@ -20,6 +20,6 @@ public class PopCommand extends Command {
 
     @Override
     public String getAsmCode() {
-        return "// " + originalSource + "\n" + atSegmentMap.get(segment) + "\nD=M\n@" + index + "\n" + SET_AND_POP_TO_ADDRESS;
+        return atSegmentMap.get(segment) + "\nD=M\n@" + index + "\n" + SET_AND_POP_TO_ADDRESS;
     }
 }

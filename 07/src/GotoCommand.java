@@ -12,7 +12,7 @@ public class GotoCommand extends Command {
 
     @Override
     public String getAsmCode() {
-        return "   @"+labelName+"\n" +
+        return "   @" + labelName + "\n" +
                 "   0;JMP\n";
     }
 }

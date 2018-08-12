@@ -198,6 +198,11 @@ public class Command {
                 String cmd = strings[0];
                 String segment = strings[1];
                 int index = Integer.parseInt(strings[2]);
+                if (cmd.equals("call")) {
+                    String functionName = strings[1];
+                    int nArgs = index;
+                    return CallCommand.create(source, cmd, functionName, nArgs);
+                }
                 if (cmd.equals("push")) {
                     return PushCommand.create(source, cmd, segment, index);
                 } else if (cmd.equals("pop")) {
@@ -227,7 +232,11 @@ public class Command {
         if (asm.contains("%1$d")) {
             asm = String.format(asm, commandCount);
         }
-        return "// " + originalSource + "\n" + asm;
+        return asm;
+    }
+
+    public String getCommentedAsmCode() {
+        return "// " + originalSource + "\n" + getAsmCode();
     }
 
 

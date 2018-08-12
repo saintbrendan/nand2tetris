@@ -7,7 +7,7 @@ public class PopTempCommand extends PopCommand {
 
     @Override
     public String getAsmCode() {
-        return "// " + originalSource + "\n@SP\n" +
+        return "\n@SP\n" +
                 "M=M-1\n" +
                 "A=M\n" +
                 "D=M\n" +

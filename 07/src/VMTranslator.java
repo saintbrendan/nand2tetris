@@ -32,7 +32,7 @@ public class VMTranslator {
         try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
             stream.map(line -> Command.create(line))
                     .filter(command -> command != null)
-                    .map(command -> command.getAsmCode())
+                    .map(command -> command.getCommentedAsmCode())
                     .forEach(x -> out.println(x));
         } catch (IOException e) {
             e.printStackTrace();

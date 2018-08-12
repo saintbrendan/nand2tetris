@@ -5,6 +5,6 @@ public class PushStaticCommand extends PushCommand {
 
     @Override
     public String getAsmCode() {
-        return "// " + originalSource + "\n" + getStaticLabel(index) + "D=M\n" + PUSH_D;
+        return getStaticLabel(index) + "D=M\n" + PUSH_D;
     }
 }

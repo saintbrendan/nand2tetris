@@ -5,6 +5,6 @@ public class PopStaticCommand extends PopCommand {
 
     @Override
     public String getAsmCode() {
-        return "// " + originalSource + "\n" + POP_TO_D + getStaticLabel(index) + "M=D";
+        return POP_TO_D + getStaticLabel(index) + "M=D";
     }
 }

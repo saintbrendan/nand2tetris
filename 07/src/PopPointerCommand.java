@@ -10,6 +10,6 @@ public class PopPointerCommand extends PopCommand {
 
     @Override
     public String getAsmCode() {
-        return "// " + originalSource + "\n" + POP_TO_D + THIS_THAT[index] + "\nM=D";
+        return POP_TO_D + THIS_THAT[index] + "\nM=D";
     }
 }

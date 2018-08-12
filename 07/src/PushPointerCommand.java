@@ -17,6 +17,6 @@ public class PushPointerCommand extends PopCommand {
 
     @Override
     public String getAsmCode() {
-        return "// " + originalSource + "\n" + THIS_THAT[index] + "\n" + PUSH_M;
+        return THIS_THAT[index] + "\n" + PUSH_M;
     }
 }
