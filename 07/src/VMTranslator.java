@@ -7,7 +7,9 @@ import java.util.stream.Stream;
 public class VMTranslator {
 
     public static void main(String[] args) throws IOException {
-        String fileName = "C:\\Users\\saint\\OneDrive\\Documents\\nand2tetris\\projects\\08\\ProgramFlow\\FibonacciSeries\\FibonacciSeries.vm";
+        //String fileName = "C:\\Users\\saint\\OneDrive\\Documents\\nand2tetris\\projects\\08\\ProgramFlow\\FibonacciSeries\\FibonacciSeries.vm";
+        String fileName = "C:\\Users\\saint\\OneDrive\\Documents\\nand2tetris\\projects\\08\\FunctionCalls\\SimpleFunction\\SimpleFunction.vm";
+
         if (args.length >= 1) {
             fileName = args[0];
         }

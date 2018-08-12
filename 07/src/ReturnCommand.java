@@ -4,7 +4,7 @@ public class ReturnCommand  extends Command {
         super(source);
     }
 
-    public static Command create(String source, String cmd, String labelName) {
+    public static Command create(String source) {
         return new ReturnCommand(source);
     }
 
@@ -14,7 +14,7 @@ public class ReturnCommand  extends Command {
                 "   AM=D\n" +
                 "   D=M\n" +
                 "   @"+segmentName+" \n" +
-                "   M=D";
+                "   M=D\n";
     }
 
     @Override
@@ -28,7 +28,7 @@ public class ReturnCommand  extends Command {
                 "   D=M\n" +
                 "   @retAddr \n" +
                 "   M=D\n" +
-                "   POP_TO_D\n" +
+                PopCommand.POP_TO_D +
                 "   @ARG \n" +
                 "   A=M\n" +
                 "   M=D\n" +
