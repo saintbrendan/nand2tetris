@@ -8,7 +8,7 @@ public class CallCommand extends Command {
         this.nArgs = nArgs;
     }
 
-    public static Command create(String source, String functionName, int nArgs) {
+    public static CallCommand create(String source, String functionName, int nArgs) {
         return new CallCommand(source, functionName, nArgs);
     }
 
@@ -38,7 +38,6 @@ public class CallCommand extends Command {
                 "   @" + functionName + "\n" +
                 "   0;JMP\n" +
                 "(" + returnLabel + ")\n";
-
     }
 }
 

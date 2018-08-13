@@ -33,7 +33,7 @@ public class ReturnCommand  extends Command {
                 "   A=M\n" +
                 "   M=D\n" +
                 "   @ARG \n" +
-                "   D=A+1\n" +
+                "   D=M+1\n" +
                 "   @SP\n" +
                 "   M=D\n" +
                 decrementEndFrameAndRestoreSegment("THAT") +

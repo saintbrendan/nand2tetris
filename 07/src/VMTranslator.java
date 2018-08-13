@@ -8,7 +8,8 @@ public class VMTranslator {
 
     public static void main(String[] args) throws IOException {
         //String fileName = "C:\\Users\\saint\\OneDrive\\Documents\\nand2tetris\\projects\\08\\ProgramFlow\\FibonacciSeries\\FibonacciSeries.vm";
-        String fileName = "C:\\Users\\saint\\OneDrive\\Documents\\nand2tetris\\projects\\08\\FunctionCalls\\SimpleFunction\\SimpleFunction.vm";
+        //String fileName = "C:\\Users\\saint\\OneDrive\\Documents\\nand2tetris\\projects\\08\\FunctionCalls\\SimpleFunction\\SimpleFunction.vm";
+        String fileName = "C:\\Users\\saint\\OneDrive\\Documents\\nand2tetris\\projects\\08\\FunctionCalls\\StaticsTest";
 
         if (args.length >= 1) {
             fileName = args[0];
@@ -24,7 +25,8 @@ public class VMTranslator {
             out.println("   D=A");
             out.println("   @SP");
             out.println("   M=D");
-            out.println(CallCommand.create("call Sys.init", "Sys.init", 0));
+            CallCommand callCommand = CallCommand.create("call Sys.init", "Sys.init", 0);
+            out.println(callCommand.getAsmCode());
             /// for each file in the directory, generate the asm
             File[] vmFiles = input.listFiles(new FilenameFilter() {
                 @Override
@@ -33,10 +35,11 @@ public class VMTranslator {
                 }
             });
             for (File file: vmFiles){
-                PrintStream thisOut = new PrintStream(file);
-                genCode(fileName, out);
+                String fullpath = file.getAbsolutePath();
+                Command.setStaticName(getFileBase(fullpath));
+                genCode(fullpath, out);
                 if (out != System.out) {
-                    genCode(fileName, System.out);
+                    genCode(fullpath, System.out);
                 }
             }
             return;
