@@ -1,0 +1,61 @@
+class BrickWall {
+
+  function void drawBrick(int x, int y) {
+    var int location;
+    let location = (y*512) + x;
+    do BrickWall.drawBrickLocation(location);
+    return;
+  }
+
+  function void clearBrick(int x, int y) {
+    var int location;
+    let location = (y*512) + x;
+    do BrickWall.clearBrickLocation(location);
+    return;
+  }
+
+  function void drawBrickLocation(int location) {
+    var int memAddress;
+  	let memAddress = 16384+location;
+  	do Memory.poke(memAddress+0, -1);
+  	do Memory.poke(memAddress+32, 4369);
+  	do Memory.poke(memAddress+64, -1);
+  	do Memory.poke(memAddress+96, 17476);
+  	do Memory.poke(memAddress+128, -1);
+  	do Memory.poke(memAddress+160, 4369);
+  	do Memory.poke(memAddress+192, -1);
+  	do Memory.poke(memAddress+224, 17476);
+  	do Memory.poke(memAddress+256, -1);
+  	do Memory.poke(memAddress+288, 4369);
+  	do Memory.poke(memAddress+320, -1);
+  	do Memory.poke(memAddress+352, 17476);
+  	do Memory.poke(memAddress+384, -1);
+  	do Memory.poke(memAddress+416, 4369);
+  	do Memory.poke(memAddress+448, -1);
+  	do Memory.poke(memAddress+480, 17476);
+  	return;
+  }
+
+  function void clearBrickLocation(int location) {
+    var int memAddress;
+    let memAddress = 16384+location;
+    do Memory.poke(memAddress+0, 0);
+    do Memory.poke(memAddress+32, 0);
+    do Memory.poke(memAddress+64, 0);
+    do Memory.poke(memAddress+96, 0);
+    do Memory.poke(memAddress+128, 0);
+    do Memory.poke(memAddress+160, 0);
+    do Memory.poke(memAddress+192, 0);
+    do Memory.poke(memAddress+224, 0);
+    do Memory.poke(memAddress+256, 0);
+    do Memory.poke(memAddress+288, 0);
+    do Memory.poke(memAddress+320, 0);
+    do Memory.poke(memAddress+352, 0);
+    do Memory.poke(memAddress+384, 0);
+    do Memory.poke(memAddress+416, 0);
+    do Memory.poke(memAddress+448, 0);
+    do Memory.poke(memAddress+480, 0);
+    return;
+  }
+
+}

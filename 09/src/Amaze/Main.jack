@@ -7,7 +7,12 @@
 class Main {
     function void main() {
         do SplashScreen.draw();
-        do SplashScreen.drawBrick(3);
+        do BrickWall.drawBrickLocation(0);
+        do BrickWall.drawBrickLocation(4);
+        do BrickWall.drawBrickLocation(5);
+        do BrickWall.clearBrickLocation(5);
+        do BrickWall.clearBrick(5,1);
+        do BrickWall.drawBrick(2,1);
         return;
     }
 }
