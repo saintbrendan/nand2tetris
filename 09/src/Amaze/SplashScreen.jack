@@ -2,7 +2,8 @@ class SplashScreen {
   function void draw() {
     var int inc;
     var int x;
-    let inc = 3;
+    var int randomseed;
+
     do Screen.setColor(true);
 
     while (x < 256) {
@@ -12,10 +13,40 @@ class SplashScreen {
     do Screen.drawLine(511, 255-x, x* 2, 255);
       let x = x + 3;
     }
-    do Output.moveCursor(10,20);
+    do Output.moveCursor(7,21);
+    do Output.printString("    *** AMAZE ***");
+    do Output.moveCursor(8,21);
     do Output.printString("Nand2Tetris Project 09");
-    do Output.moveCursor(12,20);
+    do Output.moveCursor(9,21);
     do Output.printString("Author: Brendan Cunnie");
+
+    do Output.moveCursor(11,7);
+    let randomseed = Keyboard.readInt("Enter your favorite number and press Enter: ");
+    //do Output.moveCursor(14,18);
+    //do Output.printInt(randomseed);
+
     return;
+  }
+
+  function void drawBrick(int location) {
+    var int memAddress;
+  	let memAddress = 16384+location;
+  	do Memory.poke(memAddress+0, -1);
+  	do Memory.poke(memAddress+32, 4369);
+  	do Memory.poke(memAddress+64, -1);
+  	do Memory.poke(memAddress+96, 17476);
+  	do Memory.poke(memAddress+128, -1);
+  	do Memory.poke(memAddress+160, 4369);
+  	do Memory.poke(memAddress+192, -1);
+  	do Memory.poke(memAddress+224, 17476);
+  	do Memory.poke(memAddress+256, -1);
+  	do Memory.poke(memAddress+288, 4369);
+  	do Memory.poke(memAddress+320, -1);
+  	do Memory.poke(memAddress+352, 17476);
+  	do Memory.poke(memAddress+384, -1);
+  	do Memory.poke(memAddress+416, 4369);
+  	do Memory.poke(memAddress+448, -1);
+  	do Memory.poke(memAddress+480, 17476);
+  	return;
   }
 }
