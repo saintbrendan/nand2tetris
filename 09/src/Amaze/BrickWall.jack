@@ -58,4 +58,18 @@ class BrickWall {
     return;
   }
 
+  function void brickScreen() {
+    var int x, y;
+    let y = 0;
+    while (y < 15) {
+      let x = 0;
+      while (x < 31) {
+        do BrickWall.drawBrick(x, y);
+        let x = x + 1;
+      }
+      let y = y + 1;
+    }
+    return;
+  }
+
 }

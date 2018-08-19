@@ -1,0 +1,50 @@
+/**
+* Drawn from http://nand2tetris-questions-and-answers-forum.32033.n3.nabble.com/Random-number-generator-for-hack-cpu-td4025503.html#a4025511
+* and other nonshifting pseudorandom generation algorithms.
+*/
+
+
+class Randomizer {
+    static int callCount;
+    field int seed;
+
+    constructor Randomizer new(int seedIn) {
+        let seed = seedIn;
+        let seed = rand();
+        return this;
+    }
+
+    method int rand() {
+        /** return a random number in the range 0..32767 */
+        let callCount = callCount + 1;
+        let seed = (seed * 181) + 20249 + callCount;
+        if (seed < 0) {
+            let seed = (seed - 32767) - 1;
+        }
+        return seed;
+    }
+
+
+    method int randRange(int range) {
+        /** return a random number in the range 0..range */
+        var int mask;
+        var int ret;
+
+        let mask = 1;
+        while (mask < range) {
+            let mask = mask * 2 + 1;
+        }
+
+        let ret = rand() & mask;
+        while (ret > range) {
+            let ret = rand() & mask;
+        }
+        return ret;
+    }
+
+    method void dispose(){
+        do Memory.deAlloc(this);
+        return;
+    }
+
+}

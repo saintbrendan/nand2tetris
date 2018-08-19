@@ -6,13 +6,24 @@
 /** Initializes a new Square Dance game and starts running it. */
 class Main {
     function void main() {
+        var Randomizer randomizer;
+        var Cells cells;
+        var int r;
+        let cells = Cells.new();
+
+        do BrickWall.brickScreen();
         do SplashScreen.draw();
-        do BrickWall.drawBrickLocation(0);
-        do BrickWall.drawBrickLocation(4);
-        do BrickWall.drawBrickLocation(5);
-        do BrickWall.clearBrickLocation(5);
-        do BrickWall.clearBrick(5,1);
-        do BrickWall.drawBrick(2,1);
+
+        let randomizer = Randomizer.new(17);
+        do Output.moveCursor(12,7);
+        let r = randomizer.rand();
+        do Output.printInt(r);
+        do cells.isFree(0,1);
+        do cells.isFree(1,0);
+        do cells.isFree(1,1);
+
         return;
     }
+
+
 }

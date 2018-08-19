@@ -1,0 +1,67 @@
+class Cells {
+  field int freeCells;
+  field Array xs;
+  field Array ys;
+
+  constructor Cells new() {
+    var int x;
+    var int y;
+    var int i;
+    let freeCells = 105;
+    let xs = Array.new(105);
+    let ys = Array.new(105);
+    let i = 0;
+    let y = 0;
+    while (y < 7) {
+      let x = 0;
+      while (x < 15) {
+        let xs[i] = x;
+        let ys[i] = y;
+        let i = i + 1;
+        let x = x + 1;
+      }
+      let y = y + 1;
+    }
+    return this;
+  }
+
+  method int getFreeCells() {
+    return freeCells;
+  }
+
+  method void setFreeCells(int freeCellsIn) {
+    let freeCells = freeCellsIn;
+    return;
+  }
+
+  method boolean isFree(int x, int y) {
+    var int location;
+    var int p;
+    if (x < 0) {
+      return false;
+    }
+    if (y < 0) {
+      return false;
+    }
+    if (x > 14) {
+      return false;
+    }
+    if (y > 6) {
+      return false;
+    }
+    let x = x + x + 1;
+    let y = y + y + 1;
+    let location = (y*512) + x + 16384;
+    let p = Memory.peek(location);
+    do BrickWall.clearBrick(x,y);
+    do BrickWall.clearBrick(0,2);
+
+    do Output.moveCursor(12,18);
+    do Output.printInt(p);
+    if (p = 0) {
+      return false;
+    }
+    return true;
+  }
+
+}
