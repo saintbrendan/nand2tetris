@@ -1,0 +1,21 @@
+class SplashScreen {
+  function void draw() {
+    var int inc;
+    var int x;
+    let inc = 3;
+    do Screen.setColor(true);
+
+    while (x < 256) {
+    do Screen.drawLine(0, 255 - x, x* 2, 0);
+    do Screen.drawLine(x*2, 0, 511, x);
+    do Screen.drawLine(0, x, x* 2, 255);
+    do Screen.drawLine(511, 255-x, x* 2, 255);
+      let x = x + 3;
+    }
+    do Output.moveCursor(10,20);
+    do Output.printString("Nand2Tetris Project 09");
+    do Output.moveCursor(12,20);
+    do Output.printString("Author: Brendan Cunnie");
+    return;
+  }
+}
