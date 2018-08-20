@@ -12,7 +12,6 @@ class MazeMaker {
     var int r;
     var int direction;
 
-    do Output.printString("AAA");
     let randomizer = Randomizer.new(0);
     let mazeCellCount = 0;
     let mazeXs = Array.new(105);
@@ -20,9 +19,8 @@ class MazeMaker {
 
     let x = 14;
     let y = 6;
-    do Output.printString("B");
     do cells.clear(x,y);
-    do Output.printString("C");
+    do Output.printString("A");
     //{
       let mazeXs[mazeCellCount] = x;
       let mazeYs[mazeCellCount] = y;
@@ -39,6 +37,10 @@ class MazeMaker {
           return;
         }
         let r = randomizer.randRange(mazeCellCount-1);
+        do Output.printInt(r);
+        do Output.printString(" ");
+        let x = mazeXs[r];
+        let y = mazeYs[r];
       } else {
         let r = randomizer.randRange(freeNeighborCount);
         let freeNeighborDirections = cells.getFreeNeighborDirections(x, y);
@@ -66,16 +68,30 @@ class MazeMaker {
           let by1 = by0+1;
           let by2 = by0+2;
         }
-        do Output.printString("V");
         do BrickWall.clearBrick(bx1, by1);
-        do Output.printString("X");
         do BrickWall.clearBrick(bx2, by2);
         do Output.printString("Y");
+        let x = (bx2 - 1) / 2;
+        let y = (by2 - 1) / 2;
       }
-      let x = (bx2 - 1) / 2;
-      let x = (by2 - 1) / 2;
     //}
 
+    return;
+  }
+
+  function void removeFromArrays(int x, int y, Array mazeXs, Array mazeYs, Array mazeCellCount) {
+    var int i, max;
+    let max = mazeCellCount - 1;
+    let i = 0;
+    while (i < mazeCellCount) {
+      if (mazeXs[i] = x) {
+        if (mazeYs[i] = y) {
+          let mazeXs[i] = mazeXs[max];
+          let mazeYs[i] = mazeYs[max];
+          return;
+        }
+      }
+    }
     return;
   }
 }
