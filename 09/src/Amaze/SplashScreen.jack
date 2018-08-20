@@ -13,15 +13,16 @@ class SplashScreen {
     do Screen.drawLine(511, 255-x, x* 2, 255);
       let x = x + 3;
     }
-    do Output.moveCursor(7,21);
+    do Output.moveCursor(5,21);
     do Output.printString("    *** AMAZE ***");
-    do Output.moveCursor(8,21);
+    do Output.moveCursor(6,21);
     do Output.printString("Nand2Tetris Project 09");
-    do Output.moveCursor(9,21);
+    do Output.moveCursor(7,21);
     do Output.printString("Author: Brendan Cunnie");
+    do Output.moveCursor(10,18);
+    do Output.printString("(Try numbers like 23 or 999)");
 
-    do Output.moveCursor(21,7);
-    let randomseed = Keyboard.readInt("Enter your favorite number and press Enter: ");
+
     //do Output.moveCursor(14,18);
     //do Output.printInt(randomseed);
 

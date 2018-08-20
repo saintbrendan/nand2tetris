@@ -1,6 +1,5 @@
 class MazeMaker {
-  function void make(Cells cells) {
-
+  function void make(Cells cells, Randomizer randomizer) {
     var int freeCells;
     var Array mazeXs, mazeYs;
     var int mazeCellCount;
@@ -8,11 +7,11 @@ class MazeMaker {
     var int freeNeighborCount;
     var Array freeNeighborDirections;
     var int index;
-    var Randomizer randomizer;
     var int r;
     var int direction;
+    var int mazesize;
 
-    let randomizer = Randomizer.new(0);
+    let mazesize = 93;
     let mazeCellCount = 0;
     let mazeXs = Array.new(105);
     let mazeYs = Array.new(105);
@@ -20,15 +19,13 @@ class MazeMaker {
     let x = 14;
     let y = 6;
     do cells.clear(x,y);
-    while (true) {
+    while (index < mazesize) {
       let mazeXs[mazeCellCount] = x;
       let mazeYs[mazeCellCount] = y;
       let mazeCellCount = mazeCellCount + 1;
 
       let freeNeighborCount = cells.getFreeNeighborCount(x,y);
-      do Output.moveCursor(21,1);
-      do Output.printString("freeNeighborCount ");
-      do Output.printInt(freeNeighborCount);
+
       if (0 = freeNeighborCount) {
         ///do removeFromArrays(x, y, mazeXs, mazeYs, mazeCellCount);
         let mazeCellCount = mazeCellCount - 1;
@@ -36,14 +33,12 @@ class MazeMaker {
           return;
         }
         let r = randomizer.randRange(mazeCellCount-1);
-        do Output.printInt(r);
-        do Output.printString(" ");
+
         let x = mazeXs[r];
         let y = mazeYs[r];
       } else {
         let r = randomizer.randRange(freeNeighborCount);
         let freeNeighborDirections = cells.getFreeNeighborDirections(x, y);
-        do Output.printString("U");
         let direction = freeNeighborDirections[r];
         let bx0 = x + x + 1;
         let by0 = y + y + 1;
@@ -69,12 +64,11 @@ class MazeMaker {
         }
         do BrickWall.clearBrick(bx1, by1);
         do BrickWall.clearBrick(bx2, by2);
-        do Output.printString("Y");
         let x = (bx2 - 1) / 2;
         let y = (by2 - 1) / 2;
       }
+      let index = index + 1;
     }
-
     return;
   }
 
