@@ -20,8 +20,8 @@ class SplashScreen {
     do Output.moveCursor(9,21);
     do Output.printString("Author: Brendan Cunnie");
 
-    do Output.moveCursor(11,7);
-    ///let randomseed = Keyboard.readInt("Enter your favorite number and press Enter: ");
+    do Output.moveCursor(21,7);
+    let randomseed = Keyboard.readInt("Enter your favorite number and press Enter: ");
     //do Output.moveCursor(14,18);
     //do Output.printInt(randomseed);
 
