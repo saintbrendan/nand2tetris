@@ -53,15 +53,98 @@ class Cells {
     let y = y + y + 1;
     let location = (y*512) + x + 16384;
     let p = Memory.peek(location);
-    do BrickWall.clearBrick(x,y);
-    do BrickWall.clearBrick(0,2);
 
-    do Output.moveCursor(12,18);
-    do Output.printInt(p);
     if (p = 0) {
       return false;
     }
     return true;
+  }
+
+  method Array getXs() {
+    return xs;
+  }
+
+  method Array getYs() {
+    return ys;
+  }
+
+  method void clear(int x, int y) {
+    let x = x + x + 1;
+    let y = y + y + 1;
+    do BrickWall.clearBrick(x, y);
+    return;
+  }
+
+  method int getFreeNeighborCount (int x, int y) {
+    var int count;
+    let count = 0;
+    if (isFree(x, y-1)) {
+       let count = count + 1;
+    }
+    if (isFree(x-1, y)) {
+       let count = count + 1;
+    }
+    if (isFree(x+1, y)) {
+       let count = count + 1;
+    }
+    if (isFree(x, y+1)) {
+       let count = count + 1;
+    }
+    return count;
+  }
+
+
+
+  method Array getFreeNeighbors (int x, int y) {
+    var Array neighbors;
+    var int i;
+    let i = 0;
+    let neighbors = Array.new(4);
+    if (isFree(x, y-1)) {
+       let neighbors[i] = (y-1) * 15 + x;
+       let i = i + 1;
+    }
+    if (isFree(x-1, y)) {
+      let neighbors[i] = (y) * 15 + x -1;
+      let i = i + 1;
+    }
+    if (isFree(x+1, y)) {
+      let neighbors[i] = (y) * 15 + x+1;
+      let i = i + 1;
+    }
+    if (isFree(x, y+1)) {
+      let neighbors[i] = (y+1) * 15 + x;
+    }
+    return neighbors;
+  }
+
+  /**
+  * 1 North
+  * 2 West
+  * 3 East
+  * 4 South
+  */
+  method Array getFreeNeighborDirections (int x, int y) {
+    var Array directions;
+    var int i;
+    let i = 0;
+    let directions = Array.new(4);
+    if (isFree(x, y-1)) {
+       let directions[i] = 1;
+       let i = i + 1;
+    }
+    if (isFree(x-1, y)) {
+      let directions[i] = 2;
+      let i = i + 1;
+    }
+    if (isFree(x+1, y)) {
+      let directions[i] = 3;
+      let i = i + 1;
+    }
+    if (isFree(x, y+1)) {
+      let directions[i] = 4;
+    }
+    return directions;
   }
 
 }

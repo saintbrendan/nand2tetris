@@ -1,0 +1,81 @@
+class MazeMaker {
+  function void make(Cells cells) {
+
+    var int freeCells;
+    var Array mazeXs, mazeYs;
+    var int mazeCellCount;
+    var int x, y, bx0, by0, bx1, by1, bx2, by2;
+    var int freeNeighborCount;
+    var Array freeNeighborDirections;
+    var int index;
+    var Randomizer randomizer;
+    var int r;
+    var int direction;
+
+    do Output.printString("AAA");
+    let randomizer = Randomizer.new(0);
+    let mazeCellCount = 0;
+    let mazeXs = Array.new(105);
+    let mazeYs = Array.new(105);
+
+    let x = 14;
+    let y = 6;
+    do Output.printString("B");
+    do cells.clear(x,y);
+    do Output.printString("C");
+    //{
+      let mazeXs[mazeCellCount] = x;
+      let mazeYs[mazeCellCount] = y;
+      let mazeCellCount = mazeCellCount + 1;
+
+      let freeNeighborCount = cells.getFreeNeighborCount(x,y);
+      do Output.printString("Z");
+      do Output.printString("freeNeighborCount ");
+      do Output.printInt(freeNeighborCount);
+      if (0 = freeNeighborCount) {
+        ///do removeFromArrays(x, y, mazeXs, mazeYs, mazeCellCount);
+        let mazeCellCount = mazeCellCount - 1;
+        if (mazeCellCount = 0) {
+          return;
+        }
+        let r = randomizer.randRange(mazeCellCount-1);
+      } else {
+        let r = randomizer.randRange(freeNeighborCount);
+        let freeNeighborDirections = cells.getFreeNeighborDirections(x, y);
+        do Output.printString("U");
+        let direction = freeNeighborDirections[r];
+        let bx0 = x + x + 1;
+        let by0 = y + y + 1;
+        let bx1 = bx0;
+        let by1 = by0;
+        let bx2 = bx0;
+        let by2 = by0;
+        if (direction = 1) { // North
+          let by1 = by0-1;
+          let by2 = by0-2;
+        }
+        if (direction = 2) { // East
+          let bx1 = bx0-1;
+          let bx2 = bx0-2;
+        }
+        if (direction = 3) { // West
+          let bx1 = bx0+1;
+          let bx2 = bx0+2;
+        }
+        if (direction = 4) { // South
+          let by1 = by0+1;
+          let by2 = by0+2;
+        }
+        do Output.printString("V");
+        do BrickWall.clearBrick(bx1, by1);
+        do Output.printString("X");
+        do BrickWall.clearBrick(bx2, by2);
+        do Output.printString("Y");
+      }
+      let x = (bx2 - 1) / 2;
+      let x = (by2 - 1) / 2;
+    //}
+
+    return;
+  }
+}
